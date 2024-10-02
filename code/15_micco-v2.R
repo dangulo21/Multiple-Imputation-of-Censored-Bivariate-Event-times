@@ -4,54 +4,43 @@
 ######################################################################################
 ######################################################################################
 library(dplyr)
-library(mgcv, lib.loc = "/mnt/biostat/software/CentOS/8.7/R/4.2.2/lib64/R/library")
+library(mgcv)
 library(survival)
-#library(mhazard)
 library(MASS)
 library(Rfast)
-#library(mgcv, lib.loc = '~/R/x86_64-pc-linux-gnu-library/4.1')
 
-  #source("00_helpers.R")
-  source("MI/00_helpers.R")
+  source("00_helpers.R")
   
   ######################################################################################
   ################################## READ DATA #########################################
   ######################################################################################
-  
-  #Passed arguments
-  args = commandArgs(trailingOnly = T)
-  
+
   method = "exponential"
   
-  rho = as.numeric(args[1])
-  censoring = as.numeric(args[2])
+  rho = 0.5
+  censoring = 40
   
-  #path_data = paste0("data/",method,"/real_data_corr_",rho,"_cens_",censoring,".RData")
-  path_data = paste0("MI/data/",method,"/real_data_corr_",rho,"_cens_",censoring,".RData")
-  
+  path_data = paste0("data/",method,"/real_data_corr_",rho,"_cens_",censoring,".RData")
   load(path_data)
   
-  #load(paste0("data/",method,"/true_probs_corr_",rho,".RData"))
-  load(paste0("MI/data/",method,"/true_probs_corr_",rho,".RData"))
-  
-  
+  load(paste0("data/",method,"/true_probs_corr_",rho,".RData"))
+
   #######################################################################################
   ############################### SIMULATION SET UP #####################################
   #######################################################################################
   
-  #load(paste0("data/",method,"/parameters.RData"))
-  load(paste0("MI/data/",method,"/parameters.RData"))
+  load(paste0("data/",method,"/parameters.RData"))
   
-  n = as.numeric(args[3])
-  sim <- as.numeric(args[4])
-  
+  n = 250
+
+  sim = 121
   set.seed(sim+19700620)
   
   data_sim <- sample(seq(1,N), n, replace = FALSE)
   data_sim <- real_data[data_sim,] |> dplyr::select(x1,x2,delta1,delta2)
   remove(real_data)
   
-  #Define L
+  #Define L and M
   L = 20
   M = 20
   
@@ -241,7 +230,7 @@ library(Rfast)
   ####################################################################################
   
   name_all = paste0("rho_",rho,"_cens_",censoring,"_L_",L,"_M_",M,"_n_",n,"_sim_",sim,".RData")
-  name = paste0("MI/results-all/",name_all)
+  name = paste0("results-all/",name_all)
   save(df_res, file = name)
   
 

@@ -1,8 +1,5 @@
 library(dplyr)
 library(tidyverse)
-library(ggplot2)
-library(ggsci)
-library(latex2exp)
 
 
 #########################################################################

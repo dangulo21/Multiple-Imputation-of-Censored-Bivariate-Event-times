@@ -50,8 +50,7 @@ library(mgcv)
       Delta1 = data_sim$delta1, Delta2 = data_sim$delta2,
       estimator = "dabrowska",
       conf.int = TRUE,
-      R = 1000
-    )
+      R = 1000)
   
   
   ft.1 <- sort(unique(data_sim[data_sim$delta1 == TRUE,]$x1))
@@ -130,7 +129,7 @@ library(mgcv)
   ####################################################################################
   
   name_all = paste0("rho_",rho,"_cens_",censoring,"_n_",n,"_sim_",sim,".RData")
-  name = paste0("MI/results-all/",name_all)
+  name = paste0("results-all/",name_all)
   save(df_res, file = name)
   
   

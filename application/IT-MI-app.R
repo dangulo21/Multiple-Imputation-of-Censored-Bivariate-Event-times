@@ -11,7 +11,7 @@ library(Rfast)
 library(mgcv)
 library(survSpearman)
 
-  source("MI/00_helpers.R")
+  source("code/00_helpers.R")
   
   ######################################################################################
   ################################## READ DATA #########################################
@@ -27,8 +27,7 @@ library(survSpearman)
       timeToRegimenChange = pmin(timeToRegimenChange, tau),
       timeToViralFailure = pmin(timeToViralFailure, tau),
       regimenChange = ifelse(timeToRegimenChange >= tau, 1, regimenChange),
-      viralFailure = ifelse(timeToViralFailure >= tau, 1, viralFailure)
-    )
+      viralFailure = ifelse(timeToViralFailure >= tau, 1, viralFailure))
  
   data_sim <- 
     df |>
@@ -239,7 +238,7 @@ library(survSpearman)
   #################################### SAVE ##########################################
   ####################################################################################
    
-  name = paste0("MI/results-final/application/IT-MI.RData")
+  name = paste0("results-final/application/IT-MI-app.RData")
   save(df_res, file = name)
   
 

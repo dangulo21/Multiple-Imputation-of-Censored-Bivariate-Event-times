@@ -15,31 +15,25 @@ library(mgcv)
   ################################## READ DATA #########################################
   ######################################################################################
   
-  #Pass arguments
-  args = commandArgs(trailingOnly = T)
+  method = "exponential"
   
-  method = "uniform"
-  rho = as.numeric(args[1])
-  censoring = as.numeric(args[2])
+  rho = 0.5
+  censoring = 40
   
-  #path_data = paste0("results/",method,"/data/real_data_corr_",rho,"_cens_",censoring,".RData")
-  path_data = paste0("MI/data/",method,"/real_data_corr_",rho,"_cens_",censoring,".RData")
-  
+  path_data = paste0("data/",method,"/real_data_corr_",rho,"_cens_",censoring,".RData")
   load(path_data)
   
-  #load(paste0("results/",method,"/data/true_probs_corr_",rho,".RData"))
-  load(paste0("MI/data/",method,"/true_probs_corr_",rho,".RData"))
-  
+  load(paste0("data/",method,"/true_probs_corr_",rho,".RData"))
+
   #######################################################################################
   ############################### SIMULATION SET UP #####################################
   #######################################################################################
   
-  #load(paste0("results/",method,"/data/parameters.RData"))
-  load(paste0("MI/data/",method,"/parameters.RData"))
+  load(paste0("data/",method,"/parameters.RData"))
   
-  n = as.numeric(args[3])
-  
-  sim <- as.numeric(args[4])
+  n = 250
+
+  sim = 121
   set.seed(sim+19700620)
   
   data_sim <- sample(seq(1,N), n, replace = FALSE)

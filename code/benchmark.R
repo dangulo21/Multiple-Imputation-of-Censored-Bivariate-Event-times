@@ -6,16 +6,11 @@
 
 library(dplyr)
 library(survival)
-#library(mhazard)
-library(mhazard, lib.loc = '~/R/x86_64-pc-linux-gnu-library/4.1')
+library(mhazard)
 library(MASS)
 library(Rfast)
-#library(mgcv)
-library(mgcv, lib.loc = '~/R/x86_64-pc-linux-gnu-library/4.1')
+library(mgcv)
 
-  #source("00_helpers.R")
-  source("MI/00_helpers.R")
-  
   ######################################################################################
   ################################## READ DATA #########################################
   ######################################################################################

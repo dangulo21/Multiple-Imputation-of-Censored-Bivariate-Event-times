@@ -7,13 +7,12 @@
 library(dplyr)
 library(tidyr)
 library(survival)
-#library(mhazard)
-library(mhazard, lib.loc = '~/R/x86_64-pc-linux-gnu-library/4.1')
+library(mhazard)
 library(MASS)
 library(Rfast)
 library(mgcv)
 
-  source("MI/00_helpers.R")
+ 
   ######################################################################################
   ################################## READ DATA #########################################
   ######################################################################################
@@ -28,8 +27,7 @@ library(mgcv)
       timeToRegimenChange = pmin(timeToRegimenChange, tau),
       timeToViralFailure = pmin(timeToViralFailure, tau),
       regimenChange = ifelse(timeToRegimenChange >= tau, 1, regimenChange),
-      viralFailure = ifelse(timeToViralFailure >= tau, 1, viralFailure)
-    )
+      viralFailure = ifelse(timeToViralFailure >= tau, 1, viralFailure))
   
   data_sim <- 
     df |>
@@ -132,7 +130,7 @@ library(mgcv)
   #################################### SAVE ##########################################
   ####################################################################################
   
-  name = paste0("MI/results-final/application/Dabrowska.RData")
+  name = paste0("results-final/application/Dabrowska-app.RData")
   save(df_res, file = name)
   
 

@@ -1,6 +1,6 @@
 restricted_marginal <- function(id,
-                                var.time,var.delta,
-                                covar.time,covar.delta){
+                                var.time, var.delta,
+                                covar.time, covar.delta){
     
   #Set starting epsilon
   epsilon = 1.0

@@ -2,16 +2,8 @@ restricted_marginal <- function(id,
                                 var.time,var.delta,
                                 covar.time,covar.delta,
                                 df_imp){
-  
-  #Just to see what is going on
-  # id = i
-  # var.time = time.second
-  # var.delta = delta.second
-  # covar.time = impute.first
-  # covar.delta = delta.first
-
-  
-  # Define initialization variables
+   
+  # Euclidean parameter distance, epsilon
   epsilon = 0.2
   max.epsilon = tau  #the maximum difference is tau (someone with X=tau and someone with X=0, theoretically)
   
@@ -19,16 +11,18 @@ restricted_marginal <- function(id,
   
   # To ensure we have a proper imputation, in the risk set the largest observed time has to be and event
   # If that does not happen, increase delta until it does. 
-  # By definition, since our RVs are min(T,tau) - we checked all simulation seeds - in every simulated
-  # dataset the last observed time for both endpoints is an event.
+  # By definition, since our RVs are min(T,tau) - we checked all simulation seeds - in every simulated dataset the last observed time for both endpoints is an event.
   # How much can epsilon increase until the last observed time is an event? tau 
   
-  # Initial risk set: i) individuals at risk for the event being imputed, ii) close euclidean distance for 
-  # the other endpoint. 
-  #cut.off = round(length(which(df_imp[,var.time] > df_imp[id,var.time]))/5)
-  #cut.off = min(length(which(df_imp[,var.time] > df_imp[id,var.time])), 5)
+  # Initial risk set: i) individuals at risk for the event being imputed, ii) close euclidean distance for the other endpoint
+
+  # The minimal size of the risk set cn be set by: i. minimmum number of events, and ii. minimmum number of individuals
+  # The first one i. minimmum number of events, is set up with:
+  cut.off = min(sum(df_imp[which(df_imp[,var.time] > df_imp[id,var.time]),var.delta]) , 10)
+
+  # The second one ii. minimmum number of individuals, is set up with:
+  #cut.off = min(length(which(df_imp[,var.time] > df_imp[id,var.time])), 10)
   
-  cut.off = min(sum(df_imp[which(df_imp[,var.time] > df_imp[id,var.time]),var.delta]) , 5)
   risk.set <- which(df_imp[,var.time] > df_imp[id,var.time] & 
                       abs(df_imp[,covar.time] - df_imp[id,covar.time]) <= epsilon)
   

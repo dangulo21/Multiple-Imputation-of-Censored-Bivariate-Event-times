@@ -2,11 +2,11 @@
 
 ## Descrption 
 
-The `Multiple Imputation of Censored Bivariate Event-times` houses all data and source files for the Multiple Imputation of Censored  Bivariate Event-times via Inverse Transform and Nonparametric Gibbs Sampling article. 
+The `Multiple Imputation of Censored Bivariate Event-times` houses all data and source files for the Multiple Imputation of Censored  Bivariate Event-times via Inverse Transform and Nonparametric Gibbs Sampling article by Daniela Angulo and Susan Murray. 
 
 ## Data sources
  
-The *data* folder contains all the datasets created for the simulation analysis. The file names indicate the sampling configuration used (regarding correlation and the marginal censoring rate). 
+The *data* folder contains all the datasets created for the simulation analysis. The folder names indicate time-to-event distribution and censoring-times distribution, respectively. For example, `exponential-uniform` refers to the data configuratin of bivariate exponential event-times with uniform censoring. Within each folder, file names indicate the sampling configuration used (regarding correlation and censoring rate). 
 
 ## Source files
 

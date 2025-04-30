@@ -94,10 +94,10 @@ library(MIWilson)
   
   
   # Dabrowska's mhzard functions returns a matrix with nrow = t1 and ncol = t2
-  # With an added zero at the beginning Therefore c(Fhat) reads the survival probabilities
+  # With an added zero at the beginning. Therefore c(Fhat) reads the survival probabilities
   # at: all t1, with t2 = 0, followed by all t1, with t2 = 1, and son on. 
-  # shat.boot$t is a matrix of 1000 x (t1xt2). Where the order of the columns
-  # is all t1, with t2 = 0, followed by all r1, with t2 = 1 and so on (why? check return in function). 
+  # shat.boot$t is a matrix of [R = 1000 x (t1xt2)]. Where the order of the columns
+  # is all t1, with t2 = 0, followed by all r1, with t2 = 1 and so on. 
   
   
   # df_dab has the order: all t1, with t2= 0, followed by all t1, with t2 = 1, and so on
@@ -109,7 +109,7 @@ library(MIWilson)
       ub = CI.boot[2,],
       sd.boot = sd.boot)
   
-  
+  # Mapping survival probabilities to the t1xt2 grid of values in df_comp
   for(i in 1:nrow(df_comp)){
     
     val.t1 = max(c(0,ft.1)[c(0,ft.1) <= df_comp$t1[i]])
@@ -135,7 +135,8 @@ library(MIWilson)
     df_comp$LB_T2[i] = df_dab[df_dab$t1 == 0 & df_dab$t2 == val.t2,]$lb
     df_comp$UB_T2[i] = df_dab[df_dab$t1 == 0 & df_dab$t2 == val.t2,]$ub}
   
-  
+
+  # Estimating c-loglog CP and length of 95% CI.                 
   df_dab <-
     df_comp |>
     mutate(
@@ -178,8 +179,6 @@ library(MIWilson)
       n = n, 
       sim = sim,
       method = "Dabrowska")
-  
-  
   
   df_dab <-
     df_dab |>
